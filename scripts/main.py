@@ -36,7 +36,7 @@ def consultar_asesor(pregunta_alumno):
             SystemMessage(content=instrucciones),
             UserMessage(content=pregunta_alumno),
         ],
-        model="google/gemini-1.5-flash",
+        model="gpt-4o-mini",  # <-- ESTE ES EL CAMBIO CLAVE
         temperature=0.7,
         max_tokens=1000
     )
