@@ -44,24 +44,22 @@ def consultar_asesor(pregunta_alumno):
     return response.choices[0].message.content
 
 if __name__ == "__main__":
-    # Capturamos el evento de GitHub (esto es lo nuevo)
     event_path = os.getenv("GITHUB_EVENT_PATH")
     
     if event_path:
         with open(event_path, "r") as f:
             event_data = json.load(f)
-            # Extraemos el texto del comentario del alumno
-            duda = event_data.get("comment", {}).get("body", "")
-            user = event_data.get("comment", {}).get("user", {}).get("login", "Alumno")
+            
+            # Extraemos el texto: busca en 'comment' primero, si no hay, busca en 'discussion'
+            duda = event_data.get("comment", {}).get("body") or event_data.get("discussion", {}).get("body", "")
+            user = event_data.get("comment", {}).get("user", {}).get("login") or event_data.get("discussion", {}).get("user", {}).get("login", "Alumno")
             
             if duda:
-                print(f"Respondiendo a @{user}...")
+                # Omitimos imprimir "Respondiendo a..." para que no ensucie la respuesta final en GitHub
                 respuesta = consultar_asesor(duda)
-                # Imprimimos la respuesta para que la Action la pueda capturar
                 print(respuesta)
             else:
-                print("No se encontró texto en el comentario.")
+                print("No se encontró texto ni en el comentario ni en la discusión.")
     else:
-        # Modo de prueba local por si ejecutas en tu terminal
         print("Ejecutando en modo local...")
         print(consultar_asesor("¿Qué es una parábola?"))
