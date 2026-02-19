@@ -62,4 +62,4 @@ if __name__ == "__main__":
                 print("No se encontró texto ni en el comentario ni en la discusión.")
     else:
         print("Ejecutando en modo local...")
-        print(consultar_asesor("¿Qué es una parábola?"))
+        print(consultar_asesor("¿Qué es una parábola?")) 
