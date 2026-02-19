@@ -31,7 +31,18 @@ jobs:
         run: |
           python scripts/main.py > response.txt
           echo "ANSWER_FILE=response.txt" >> $GITHUB_ENV
+      # ... (pasos anteriores: Instalar dependencias, Ejecutar Asesor, etc.)
 
+      - name: Guardar Base de Datos JSON en el repositorio
+        run: |
+          git config --global user.name "GeoAsesor-Bot"
+          git config --global user.email "bot@ciencias.unam.mx"
+          git add db_alumnos.json
+          git commit -m "Actualizar límite de consultas diarias" || echo "No hay cambios para commitear"
+          git push
+
+      - name: Publicar comentario en la Discussion
+      # ... (resto de tu código de GraphQL)
       - name: Publicar comentario en la Discussion
         uses: actions/github-script@v7
         with:
