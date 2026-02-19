@@ -4,11 +4,10 @@ on:
     types: [created]
   discussion_comment:
     types: [created]
-  
+
 jobs:
   responder:
     runs-on: ubuntu-latest
-    # AÑADE ESTAS LÍNEAS AQUÍ:
     permissions:
       discussions: write
       contents: read
@@ -23,23 +22,24 @@ jobs:
 
       - name: Instalar dependencias
         run: pip install azure-ai-inference
-        
-        - name: Ejecutar Asesor y Guardar Respuesta
-        id: asesor_logic
+
+      - name: Ejecutar Asesor
+        id: run_script
         env:
           GITHUB_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
         run: |
-          # Guardamos la salida del script en una variable de GitHub
-          echo "ANSWER<<EOF" >> $GITHUB_ENV
-          python scripts/main.py >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          python scripts/main.py > response.txt
+          echo "ANSWER_FILE=response.txt" >> $GITHUB_ENV
 
       - name: Publicar comentario en la Discussion
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('response.txt', 'utf8');
             github.rest.discussions.addComment({
               discussion_id: context.payload.discussion.node_id,
-              body: process.env.ANSWER
+              body: body
             })
