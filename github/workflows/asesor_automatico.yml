@@ -1,11 +1,17 @@
 name: Respuesta del GeoAsesor
 on:
+  discussion:
+    types: [created]
   discussion_comment:
     types: [created]
-
+  
 jobs:
   responder:
     runs-on: ubuntu-latest
+    # AÑADE ESTAS LÍNEAS AQUÍ:
+    permissions:
+      discussions: write
+      contents: read
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
