@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       discussions: write
-      contents: read
+      contents: write  # <-- ¡Permiso vital para guardar el JSON!
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
@@ -31,7 +31,6 @@ jobs:
         run: |
           python scripts/main.py > response.txt
           echo "ANSWER_FILE=response.txt" >> $GITHUB_ENV
-      # ... (pasos anteriores: Instalar dependencias, Ejecutar Asesor, etc.)
 
       - name: Guardar Base de Datos JSON en el repositorio
         run: |
@@ -41,8 +40,6 @@ jobs:
           git commit -m "Actualizar límite de consultas diarias" || echo "No hay cambios para commitear"
           git push
 
-      - name: Publicar comentario en la Discussion
-      # ... (resto de tu código de GraphQL)
       - name: Publicar comentario en la Discussion
         uses: actions/github-script@v7
         with:
