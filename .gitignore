@@ -1,0 +1,16 @@
+# 🛑 Entornos virtuales (¡No subir librerías pesadas!)
+venv/
+env/
+
+# 🛑 Archivos de secretos y tokens (¡Nunca subir llaves a la nube!)
+GeoAsesor_Token.txt
+.env
+
+# 🛑 Caché de Python (Archivos temporales que Python crea al ejecutarse)
+__pycache__/
+*.pyc
+*.pyo
+
+# 🛑 Archivos del sistema operativo
+.DS_Store
+Thumbs.db
