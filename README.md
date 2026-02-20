@@ -10,12 +10,11 @@ Bienvenido al repositorio oficial de **GeoAsesor-Ciencias**, un ecosistema de as
 * **Ayudante:** Fabián Elizalde Hernández
 * **Ayudante:** Nefthali Cerecedo Cruz
 * **Horario:** Lunes a Viernes, 07:00 a 08:00 hrs
-* **Modalidad:** Presencial
+* **Modalidad:** Mixta
 
 ### 📊 Evaluación
 * **Exámenes (3):** 55%
 * **Tareas (1 o 2 por examen):** 55%
-*(Nota: Referencia basada en el programa presentado para el grupo 4020).*
 
 ### 🗺️ Temario General
 1. **Introducción:** Historia y fundamentos (Fermat, Descartes, Newton).
@@ -34,7 +33,7 @@ Para complementar la asesoría de la IA, puedes consultar las clases grabadas en
 ---
 
 ## 🛠️ Stack Tecnológico
-* **Modelo de IA:** Gemini 1.5 Flash (vía GitHub Models).
+* **Modelo de IA:** gpt-4o mini (vía GitHub Models).
 * **Lenguaje:** Python 3.10+.
 * **Infraestructura:** GitHub Actions (Asesor Comunitario) & GitHub Codespaces (Laboratorio).
 
